@@ -1,4 +1,4 @@
-# ReqResAPIAutomation
+# ReqRes API Automation (https://reqres.in)
 
-## API Automation for https://reqres.in
+## This project uses Rest Assured Library, JUnit, Hamcrest library
 
