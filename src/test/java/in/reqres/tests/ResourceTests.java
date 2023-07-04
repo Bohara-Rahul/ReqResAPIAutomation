@@ -4,6 +4,8 @@ import in.reqres.tests.models.Resource;
 import io.restassured.path.json.JsonPath;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
+
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
@@ -32,15 +34,18 @@ public class ResourceTests {
 
     @Test
     public void get_resources_by_params() {
+        HashMap<String, Integer> queryParams = new HashMap<String, Integer>();
+        queryParams.put("page", 2);
+        queryParams.put("per_page", 5);
+
         given()
-                .queryParam("page", 2)
-                .queryParam("per_page", 5)
+                .queryParams(queryParams)
                 .when()
-                .get("https://reqres.in/api/unknown")
+                    .get("https://reqres.in/api/unknown")
                 .then()
-                .assertThat()
-                .statusCode(200)
-                .body("page", equalTo(2),
+                    .assertThat()
+                    .statusCode(200)
+                    .body("page", equalTo(2),
                         "per_page", equalTo(5),
                         "total", equalTo(12),
                         "total_pages", equalTo(3),
@@ -64,13 +69,13 @@ public class ResourceTests {
 
         String res = given()
                 .when()
-                .get("https://reqres.in/api/unknown/"+ resource.getId())
+                    .get("https://reqres.in/api/unknown/"+resource.getId())
                 .then()
-                .assertThat()
-                    .statusCode(200)
-                    .extract()
-                    .response()
-                    .asString();
+                    .assertThat()
+                        .statusCode(200)
+                        .extract()
+                        .response()
+                        .asString();
 
         assertThat(JsonPath.from(res).getInt("data.id"), equalTo(resource.getId()));
         assertThat(JsonPath.from(res).getString("data.name"), equalTo(resource.getName()));

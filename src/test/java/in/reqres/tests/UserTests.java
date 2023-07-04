@@ -38,7 +38,7 @@ public class UserTests {
 
     @Test
     public void get_valid_user() {
-        var user = new User(2,
+        var user = new User("2",
                 "Janet",
                 "Weaver",
                 "janet.weaver@reqres.in",
@@ -46,16 +46,18 @@ public class UserTests {
         );
 
         String res = given()
-                .when()
-                .get("https://reqres.in/api/users/"+user.getId())
-                .then()
-                .assertThat()
-                .statusCode(200)
-                .extract()
-                .response()
-                .asString();
+                        .baseUri("https://reqres.in")
+                        .pathParam("userId", user.getId())
+                 .when()
+                    .get("/api/users/{userId}")
+                 .then()
+                    .assertThat()
+                        .statusCode(200)
+                        .extract()
+                        .response()
+                        .asString();
 
-        assertThat(JsonPath.from(res).getInt("data.id"), equalTo(user.getId()));
+        assertThat(JsonPath.from(res).getString("data.id"), equalTo(user.getId()));
         assertThat(JsonPath.from(res).getString("data.first_name"), equalTo(user.getFirstName()));
         assertThat(JsonPath.from(res).getString("data.last_name"), equalTo(user.getLastName()));
         assertThat(JsonPath.from(res).getString("data.email"), equalTo(user.getEmail()));
@@ -64,7 +66,7 @@ public class UserTests {
 
     @Test
     public void get_invalid_user_error() {
-        var user = new User(15);
+        var user = new User("15");
 
         given()
                 .when()
@@ -86,30 +88,26 @@ public class UserTests {
                 .body(jsonBody)
                 .post("https://reqres.in/api/users")
                 .then()
-                .log().all()
                 .assertThat()
                 .statusCode(201);
     }
 
     @Test
     public void update_user() {
-        var user = new User(5);
+        var user = new User("5");
 
         given()
                 .when()
                 .put("https://reqres.in/api/users/"+user.getId())
                 .then()
                 .assertThat()
-                    .statusCode(200)
-                    .extract()
-                    .response()
-                    .asString();
+                    .statusCode(200);
 
     }
 
     @Test
     public void delete_user() {
-        var user = new User(10);
+        var user = new User("10");
 
         given()
                 .when()
@@ -127,18 +125,19 @@ public class UserTests {
                 "}";
 
         String res = given()
-                .contentType(ContentType.JSON)
+                    .contentType(ContentType.JSON)
+                    .baseUri("https://reqres.in")
                 .when()
-                .body(jsonBody)
-                .post("https://reqres.in/api/register")
+                    .body(jsonBody)
+                    .post("/api/register")
                 .then()
-                .assertThat()
-                .statusCode(200)
-                .extract()
-                .response()
-                .asString();
+                    .assertThat()
+                    .statusCode(200)
+                    .extract()
+                    .response()
+                    .asString();
 
-        assertThat(JsonPath.from(res).getInt("id"), equalTo(4));
+        assertThat(JsonPath.from(res).getString("id"), equalTo("4"));
         assertThat(JsonPath.from(res).getString("token"), equalTo("QpwL5tke4Pnpja7X4"));
     }
 

@@ -2,7 +2,7 @@ package in.reqres.tests.models;
 
 public class User {
 
-    private int id;
+    private String id;
     private String firstName;
     private String lastName;
     private String email;
@@ -12,7 +12,7 @@ public class User {
 
     public User() {}
 
-    public User(int id) {
+    public User(String id) {
         setId(id);
     }
 
@@ -21,7 +21,7 @@ public class User {
         setJob(job);
     }
 
-    public User(int id, String first_name, String last_name, String email, String avatar) {
+    public User(String id, String first_name, String last_name, String email, String avatar) {
         setId(id);
         setFirstName(first_name);
         setLastName(last_name);
@@ -29,11 +29,11 @@ public class User {
         setAvatar(avatar);
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
