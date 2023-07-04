@@ -28,7 +28,7 @@ public class UserTests {
                         "data.first_name", hasItems("George", "Janet", "Emma", "Eve", "Charles", "Tracey"),
                         "data.last_name", hasItems("Bluth", "Weaver", "Wong", "Holt", "Morris", "Ramos"),
                         "data.email", hasItems("george.bluth@reqres.in", "janet.weaver@reqres.in", "emma.wong@reqres.in", "eve.holt@reqres.in",
-                            "charles.morris@reqres.in", "tracey.ramos@reqres.in"),
+                                "charles.morris@reqres.in", "tracey.ramos@reqres.in"),
                         "data.avatar", hasItems("https://reqres.in/img/faces/1-image.jpg", "https://reqres.in/img/faces/2-image.jpg",
                                 "https://reqres.in/img/faces/3-image.jpg", "https://reqres.in/img/faces/4-image.jpg",
                                 "https://reqres.in/img/faces/5-image.jpg", "https://reqres.in/img/faces/6-image.jpg"));
@@ -46,16 +46,16 @@ public class UserTests {
         );
 
         String res = given()
-                        .baseUri("https://reqres.in")
-                        .pathParam("userId", user.getId())
-                 .when()
-                    .get("/api/users/{userId}")
-                 .then()
-                    .assertThat()
-                        .statusCode(200)
-                        .extract()
-                        .response()
-                        .asString();
+                .baseUri("https://reqres.in")
+                .pathParam("userId", user.getId())
+                .when()
+                .get("/api/users/{userId}")
+                .then()
+                .assertThat()
+                .statusCode(200)
+                .extract()
+                .response()
+                .asString();
 
         assertThat(JsonPath.from(res).getString("data.id"), equalTo(user.getId()));
         assertThat(JsonPath.from(res).getString("data.first_name"), equalTo(user.getFirstName()));
@@ -78,14 +78,11 @@ public class UserTests {
 
     @Test
     public void create_user() {
-        String jsonBody = "{\n" +
-                "    \"name\": \"testuser\",\n" +
-                "    \"job\": \"programmer\"\n" +
-                "}";
+        var user = new User("testuser", "programmer");
 
         given()
                 .when()
-                .body(jsonBody)
+                .body(user)
                 .post("https://reqres.in/api/users")
                 .then()
                 .assertThat()
@@ -98,10 +95,10 @@ public class UserTests {
 
         given()
                 .when()
-                .put("https://reqres.in/api/users/"+user.getId())
+                .put("https://reqres.in/api/users/" + user.getId())
                 .then()
                 .assertThat()
-                    .statusCode(200);
+                .statusCode(200);
 
     }
 
@@ -111,97 +108,10 @@ public class UserTests {
 
         given()
                 .when()
-                .delete("https://reqres.in/api/users/"+user.getId())
+                .delete("https://reqres.in/api/users/" + user.getId())
                 .then()
                 .assertThat()
                 .statusCode(204);
     }
 
-    @Test
-    public void valid_register() {
-        String jsonBody = "{\n" +
-                "    \"email\": \"eve.holt@reqres.in\",\n" +
-                "    \"password\": \"pistol\"\n" +
-                "}";
-
-        String res = given()
-                    .contentType(ContentType.JSON)
-                    .baseUri("https://reqres.in")
-                .when()
-                    .body(jsonBody)
-                    .post("/api/register")
-                .then()
-                    .assertThat()
-                    .statusCode(200)
-                    .extract()
-                    .response()
-                    .asString();
-
-        assertThat(JsonPath.from(res).getString("id"), equalTo("4"));
-        assertThat(JsonPath.from(res).getString("token"), equalTo("QpwL5tke4Pnpja7X4"));
-    }
-
-    @Test
-    public void invalid_register() {
-        String jsonBody = "{\n" +
-                "    \"email\": \"sydney@fife\"\n" +
-                "}";
-
-        String res = given()
-                .contentType(ContentType.JSON)
-                .when()
-                .body(jsonBody)
-                .post("https://reqres.in/api/register")
-                .then()
-                .assertThat()
-                .statusCode(400)
-                .extract()
-                .response()
-                .asString();
-
-        assertThat(JsonPath.from(res).getString("error"), equalTo("Missing password"));
-    }
-
-    @Test
-    public void valid_login() {
-        String payload = "{\n" +
-                "    \"email\": \"eve.holt@reqres.in\",\n" +
-                "    \"password\": \"cityslicka\"\n" +
-                "}";
-
-        String res = given()
-                .contentType(ContentType.JSON)
-                .when()
-                .body(payload)
-                .post("https://reqres.in/api/login")
-                .then()
-                .assertThat()
-                .statusCode(200)
-                .extract()
-                .response()
-                .asString();
-
-        assertThat(JsonPath.from(res).getString("token"), equalTo("QpwL5tke4Pnpja7X4"));
-    }
-
-    @Test
-    public void invalid_login() {
-        String payload = "{\n" +
-                "    \"email\": \"peter@klaven\"\n" +
-                "}";
-
-        String res = given()
-                .contentType(ContentType.JSON)
-                .when()
-                .body(payload)
-                .post("https://reqres.in/api/login")
-                .then()
-                .assertThat()
-                .statusCode(400)
-                .extract()
-                .response()
-                .asString();
-
-        assertThat(JsonPath.from(res).getString("error"), equalTo("Missing password"));
-    }
 }

@@ -5,10 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="99bc9d42-371d-4005-b765-1836bd775b71" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/in/reqres/tests/ResourceTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/in/reqres/tests/ResourceTests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/in/reqres/tests/UserTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/in/reqres/tests/UserTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/in/reqres/tests/models/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/in/reqres/tests/models/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,13 +31,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "/Volumes/Macintosh HD - Data/Projects/Automation Projects/ReqResApiAutomation"
   }
-}</component>
-  <component name="RunManager" selected="JUnit.UserTests.get_valid_user">
+}]]></component>
+  <component name="RunManager" selected="JUnit.UserTests.create_user">
     <configuration name="ResourceTests.get_valid_resource" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ReqResApiAutomation" />
       <extension name="coverage">
@@ -52,6 +50,22 @@
       <option name="PACKAGE_NAME" value="in.reqres.tests" />
       <option name="MAIN_CLASS_NAME" value="in.reqres.tests.ResourceTests" />
       <option name="METHOD_NAME" value="get_valid_resource" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserTests.create_user" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="ReqResApiAutomation" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="in.reqres.tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="in.reqres.tests" />
+      <option name="MAIN_CLASS_NAME" value="in.reqres.tests.UserTests" />
+      <option name="METHOD_NAME" value="create_user" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -89,22 +103,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UserTests.invalid_register" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="ReqResApiAutomation" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="in.reqres.tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="in.reqres.tests" />
-      <option name="MAIN_CLASS_NAME" value="in.reqres.tests.UserTests" />
-      <option name="METHOD_NAME" value="invalid_register" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="UserTests.valid_login" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="ReqResApiAutomation" />
       <extension name="coverage">
@@ -123,11 +121,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.UserTests.create_user" />
         <item itemvalue="JUnit.UserTests.get_valid_user" />
         <item itemvalue="JUnit.ResourceTests.get_valid_resource" />
         <item itemvalue="JUnit.UserTests.invalid_login" />
         <item itemvalue="JUnit.UserTests.valid_login" />
-        <item itemvalue="JUnit.UserTests.invalid_register" />
       </list>
     </recent_temporary>
   </component>

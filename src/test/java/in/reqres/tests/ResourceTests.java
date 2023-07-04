@@ -90,9 +90,9 @@ public class ResourceTests {
 
         given()
                 .when()
-                .get("https://reqres.in/api/unknown/" + resource.getId())
+                    .get("https://reqres.in/api/unknown/" + resource.getId())
                 .then()
-                .assertThat()
-                .statusCode(404);
+                    .assertThat()
+                    .statusCode(404);
     }
 }
